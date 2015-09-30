@@ -48,7 +48,7 @@ public class Buffer {
 	 */
 	public void encolarMensaje(Mensaje m){
 
-		while(mensajes.size()==limite){
+		if(mensajes.size()==limite){
 			try {
 				
 				synchronized (this) {
@@ -101,7 +101,7 @@ public class Buffer {
 				s.setMensaje(mensajes.get(0));
 				mensajes.remove(0);
 				s.getMensaje().levantarPadre();
-				notifyAll();
+				notify();
 				try {
 					
 					Thread.sleep(3);
@@ -146,7 +146,7 @@ public class Buffer {
 
 
 		Properties prop = new Properties();
-		String propFileName = "config9.properties";
+		String propFileName = "config4.properties";
 		InputStream inputS = Buffer.class.getClassLoader().getResourceAsStream(propFileName);
 
 		if(inputS!=null){
